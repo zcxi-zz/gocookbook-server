@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Your Ingredients</h1>
+    </div>
+</div>
+<div class="container">
+    <h1>Add Ingredients</h1>
+    {{ wtf.quick_form(iForm) }}
+</div>
+<div class="container">
+    <div>
+        <h1>Your Ingredients</h1>
+        <hr>
+    </div>
+    <div>
+        {% if ingredients != None %}
+        {% for ingredient in ingredients %}
+            {% if ingredient.measure == 'units' %}
+                {% if ingredient.amount > 1 %}
+                    <p>{{ ingredient.amount }} {{ingredient.name }}s</p>
+                {% else %}
+                    <p>{{ ingredient.amount }} {{ingredient.name }}</p>
+                {% endif %}
+            {% elif ingredient.measure == 'mass' %}
+                {% if current_user.is_authenticated %}
+                    <p>{{ template_get_user_mass_preference_string(current_user.id, ingredient.amount) }} of {{ ingredient.name }}</p>
+                {% else %}
+                    <p>{{ template_get_user_mass_preference_string(0, ingredient.amount) }} of {{ ingredient.name }}</p>
+                {% endif %}
+            {% elif ingredient.measure == 'volume' %}
+                {% if current_user.is_authenticated %}
+                    <p>{{ template_get_user_volume_preference_string(current_user.id, ingredient.amount) }} of {{ ingredient.name }}</p>
+                {% else %}
+                    <p>{{ template_get_user_volume_preference_string(0, ingredient.amount) }} of {{ ingredient.name }}</p>
+                {% endif %}
+            {% else %}
+                <p>{{ ingredient.amount }} of {{ ingredient.name }}</p>
+            {% endif %}
+            <hr>
+        {% endfor %}
+    {% endif %}
+    </div>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Add New Recipe</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div>
+        {% if ingredients != None %}
+        {% for ingredient in ingredients %}
+        <p>{{ ingredient[2] }} 
+            {% if not ingredient[3] == 'units' %}
+                {% if ingredient[3] == 'volume' %}
+                ml 
+                {% elif ingredient[3] == 'mass' %}
+                mg 
+                {% endif %}
+            {% endif %}
+            {{ ingredient[1] }}{% if ingredient[3] == 'units' %}{% if ingredient[2] > 1 %}s{% endif %}{% endif %}</p>
+
+        {% endfor %}
+        {% endif %}
+    </div>
+    {{ wtf.quick_form(iForm) }}
+    {{ wtf.quick_form(rForm) }}
+</div>
+
+{% endblock %}

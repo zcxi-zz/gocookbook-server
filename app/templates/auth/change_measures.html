@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Go Cookbook - Change Preferred Measures{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Change Your Preferred Measurement Units</h1>
+</div>
+<div class="col-md-4">
+    <p>Current Preferred Volume Units: {% if current_user.prefers_metric_volume %}ml{% else %}cups and spoons{% endif %}</p>
+    <p>Current Preferred Mass Units: {% if current_user.prefers_metric_mass %}g{% else %}lbs{% endif %}</p>
+</div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+</div>
+{% endblock %}

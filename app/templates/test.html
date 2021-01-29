@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Top: {{ template_get_user_volume_preference_string(current_user.id, amount) }}</p>
+
+{% endblock %}

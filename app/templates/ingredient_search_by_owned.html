@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Search Recipes by Ingredients: <span class="glyphicon glyphicon-search"></span></h2>
+    <div>
+        {{ wtf.quick_form(sForm)}}
+    </div>
+</div>
+
+<div class="vertical_gap"></div>
+
+<div class="container">
+    <div class="row text-center text-lg-left">
+        {% if recipes != None %}
+            {% for recipe in recipes %}
+                <div class="col-lg-3 col-md-4 col-6 food">
+                    <a href="{{ url_for('main.view_recipe', recipe_ID=recipe.id) }}" class="d-block mb-4 h-100">
+                        {% if recipe.image_name != "" %}
+                            <img class="img-fluid img-thumbnail" src="{{ url_for('static',filename='recipe_images/'+recipe.image_name) }}" alt={{ recipe.name }}>
+                        {% endif %}
+                        <p>{{ recipe.name }}</p>
+                    </a>
+                    <hr>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

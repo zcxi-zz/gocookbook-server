@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>{{recipe.name}}</h1>
+    </div>
+</div>
+<div class="container">
+    {{ wtf.quick_form(saveToggle) }}
+    <h3>Cooking time:<p>{{ recipe.time }} minutes</p></h3>
+    <h3>Description:</h3>
+    <p>{{ recipe.description }}</p>
+    <h3>Ingredients:</h3>
+    {% if recipe.ingredients != None %}
+    {% for ingredient in recipe.ingredients %}
+    <p>{{ ingredient.amount }} {% if not ingredient.measure == 'units' %}{% if ingredient.measure == 'volume' %}ml {% elif ingredient.measure == 'mass' %}mg {% endif %}{% endif %}{{ ingredient.name }}{% if ingredient.measure == 'units' %}{% if ingredient.amount > 1 %}s{% endif %}{% endif %}</p>
+    {% endfor %}
+    {% endif %}
+    <h3>Cooking Steps:</h3>
+    {% for step in recipe.steps %}
+    <p><b>Step {{loop.index + 1}}: </b>{{step}}</p>
+    {% endfor %}
+</div>
+{% endblock %}

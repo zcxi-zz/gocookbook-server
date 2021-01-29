@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Saved Recipes</h1>
+    </div>
+</div>
+{% if recipes != None %}
+
+{% for recipe in recipes %}
+<a href="{{ url_for('main.view_recipe', recipe_ID=recipe.id) }}">{{ recipe.name }}</a>
+<hr>
+{% endfor %}
+
+{% endif %}
+{% endblock %}

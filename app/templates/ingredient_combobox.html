@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ super() }}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="Stylesheet"></link>
+  <script type="text/javascript">
+    $( function() {
+      function log( message ) {
+        $( "<div>" ).text( message ).prependTo( "#log" );
+        $( "#log" ).scrollTop( 0 );
+      }
+    
+      $( "#ingredients_box" ).autocomplete({
+        source:function(request, response) {
+            $.getJSON("{{url_for('main.autocomplete')}}",{
+                term: request.term,
+            }, function(data) {
+                response(data.matching_results);
+            });
+        },
+        minLength: 2,
+        select: function( event, ui ) {
+          log( "Selected: " + ui.item.value + ", with id: " + ui.item.id);
+        }
+      });
+    } );
+  </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="ui-widget">
+  <label for="ingredients_box">Ingredients Box: </label>
+  <input id="ingredients_box">
+</div>
+ 
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+  Result:
+  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
+
+{% endblock %}
