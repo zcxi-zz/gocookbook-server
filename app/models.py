@@ -106,7 +106,6 @@ def get_user_mass_preference(user_id):
     else:
         return True
 
-# Phil's placeholder stuff above - remove later
 
 # Association table for user recipe relations
 class RU_Association(db.Model):
@@ -119,7 +118,6 @@ class RU_Association(db.Model):
     recipe = db.relationship("Recipe")
     user = db.relationship("User")
 
-# Jason's stuff below here
 # Use Association Table for many-to-many relationship btwn recipes and ingredients
 # 3rd column is the amounts required
 class RI_Association(db.Model):

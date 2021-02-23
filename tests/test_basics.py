@@ -22,7 +22,6 @@ class BasicsTestCase(unittest.TestCase):
     def test_app_is_testing(self):
         self.assertTrue(current_app.config['TESTING'])
 
-    # Torin Unit Test
     def test_get_ingredient(self):
         populate_with_dummy_data()
         ing = get_ingredient(1)
@@ -31,7 +30,6 @@ class BasicsTestCase(unittest.TestCase):
         self.assertEqual(ing.name, ingredient_name)
         self.assertEqual(ing.measure, ingredient_measure)
 
-    # Torin Unit Test
     def test_get_recipe(self):
         populate_with_dummy_data()
         rec = get_recipe(1)
@@ -113,7 +111,6 @@ class BasicsTestCase(unittest.TestCase):
         self.assertEqual(get_aggragate_recipe_rating(1), 4)
         self.assertEqual(get_aggragate_recipe_rating(2), 4)
 
-    # Jason Unit Test
     def test_recipes(self):
         # goal is to test adding and retrieving a recipe in detail
         # after the get recipe function is tested above
@@ -139,7 +136,6 @@ class BasicsTestCase(unittest.TestCase):
         self.assertEqual(r.rating, rating)
         self.assertEqual(r.description, description)
 
-    # Jason Unit Test:
     def test_get_all_ingredients(self):
         populate_with_dummy_data()
         ingredients = get_all_ingredients()
